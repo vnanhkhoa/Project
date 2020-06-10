@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Luxury</string>
+    <string name="gioi_thieu">
+        Luxury Hotel là một khách sạn sang trọng,
+        đẳng cấp hàng đầu tại Vietnam Luxury Group.
+        Đến với Luxury Hotel, bạn không chỉ được đắm mình trong cuộc
+        sống vương giả với đầy đủ tiện nghi, dịch vụ chuyên nghiệp, chất lượng hàng đầu mà còn cảm nhận được không khí ấm cúng, thoải mái và dễ chịu như một gia đình ngay tại nhà. Luxury Hotel là một nơi an toàn, thân thiện cho mọi người khi ở Hà Nội. Tọa lạc tại một vị trí đặc quyền, ngay trung tâm thành phố, dễ dàng đến các điểm du lịch nổi tiếng, đây là một nơi tuyệt vời để ở. Đây cũng là một điểm đến lý tưởng nhờ dịch vụ cao cấp được cung cấp bởi khách sạn.
+    </string>
+    <string name="xc">CHÀO MỪNG BẠN ĐẾN KHÁCH SẠN LUXURY!</string>
+</resources>
