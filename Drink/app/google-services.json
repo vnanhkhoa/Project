@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "475735382233",
+    "firebase_url": "https://appdrinkcuoiky.firebaseio.com",
+    "project_id": "appdrinkcuoiky",
+    "storage_bucket": "appdrinkcuoiky.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475735382233:android:19c89597c7fd52691ec6c8",
+        "android_client_info": {
+          "package_name": "com.sict.drink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475735382233-5m4s50spq278p7b0nn319jm45eofoi8m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sict.drink",
+            "certificate_hash": "067d48c9d696a78906e50c8cf4f27733604fa43a"
+          }
+        },
+        {
+          "client_id": "475735382233-a9lhvpev5e44bbdhb46e2kl8s8bmbgsp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcBfqzYNosjpnP_jmF8JHXOGO46Al00ec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475735382233-a9lhvpev5e44bbdhb46e2kl8s8bmbgsp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

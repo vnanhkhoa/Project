@@ -25,13 +25,14 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static com.vnak.sotaysinhvien.Task.LoginTask.CONNECTION_TIMEOUT;
-import static com.vnak.sotaysinhvien.Task.LoginTask.READ_TIMEOUT;
 
 public class Login extends AppCompatActivity {
     TextInputLayout txtPassword;
     TextInputLayout txtEmail;
     Button btnLogin;
+    public static final int CONNECTION_TIMEOUT=10000;
+    public static final int READ_TIMEOUT=15000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +57,6 @@ public class Login extends AppCompatActivity {
                 
             }
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        
     }
 
     private void addControls() {
@@ -97,10 +92,9 @@ public class Login extends AppCompatActivity {
 
             if (user.getError() == null)
             {
-                Intent intent = new Intent();
+                Intent intent = new Intent(Login.this,MainActivity.class);
                 intent.putExtra("User",user);
-                setResult(RESULT_OK,intent);
-                finish();
+                startActivity(intent);
             }
             else {
                 Toast.makeText(Login.this,user.getError(),Toast.LENGTH_LONG).show();

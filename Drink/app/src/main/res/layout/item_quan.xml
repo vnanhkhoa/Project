@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="4dp"
+    android:id="@+id/itemQuan"
+    app:cardBackgroundColor="#fff"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:adjustViewBounds="true"
+            android:id="@+id/anh"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="5dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtten"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tên"
+                android:textColor="#464646"
+                android:layout_marginBottom="8dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtDiaChi"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp"
+                android:textColor="#252525"
+                android:drawableLeft="@drawable/ic_baseline_place_15"
+                android:drawablePadding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dia Chi"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_baseline_brightness_1_10"
+                    android:text="Mở cửa :"
+                    android:textColor="#6cc942"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtHmoCua"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_baseline_query_builder_13"
+                    android:drawablePadding="5dp"
+                    android:text="07:00 - 21:00"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtGiatb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:drawableLeft="@drawable/ic_outline_monetization_on_13"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="12,000 - 50,000"
+                android:textColor="#959595"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

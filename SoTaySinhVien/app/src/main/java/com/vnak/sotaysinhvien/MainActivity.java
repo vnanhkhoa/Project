@@ -1,7 +1,6 @@
 package com.vnak.sotaysinhvien;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -15,15 +14,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.vnak.sotaysinhvien.fragment.HomeFragment;
+import com.vnak.sotaysinhvien.fragment.PointFragment;
+import com.vnak.sotaysinhvien.fragment.ThongTinFragment;
 import com.vnak.sotaysinhvien.model.User;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
@@ -42,46 +40,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
-        user = new User();
-        SharedPreferences preferences = getSharedPreferences("User", Context.MODE_PRIVATE);
-        if (preferences != null)
-        {
-            String name = preferences.getString("Name",null);
-            String email = preferences.getString("Email",null);
-            user.setEmail(email);
-            user.setName(name);
+        Intent intent = getIntent();
+        if (intent.hasExtra("User")) {
+            user = (User) intent.getSerializableExtra("User");
             headerNav(view,user);
-        }
-        if (user.getName() ==  null) {
-            Intent intent = new Intent(MainActivity.this,Login.class);
-            startActivityForResult(intent,121);
-            return;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 121)
-        {
-            if (resultCode == RESULT_OK)
+            SharedPreferences preferences = getSharedPreferences("User", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("ID",user.getId());
+            editor.putString("MSV",user.getMsv());
+            editor.putString("Name",user.getName());
+            editor.putString("Email",user.getEmail());
+            editor.putString("Gender",user.getGender());
+            editor.putString("Birth",user.getBirth());
+            editor.putString("Class",user.getLop());
+            editor.putString("Address",user.getAddress());
+            editor.putString("SDT",user.getSdt());
+            editor.commit();
+            Toast.makeText(MainActivity.this,"Wellcome "+ user.getName(),Toast.LENGTH_LONG).show();
+        } else {
+            user = new User();
+            SharedPreferences preferences = getSharedPreferences("User", Context.MODE_PRIVATE);
+            if (preferences != null)
             {
-                user = (User) data.getSerializableExtra("User");
+                String name = preferences.getString("Name",null);
+                String email = preferences.getString("Email",null);
+                user.setEmail(email);
+                user.setName(name);
                 headerNav(view,user);
-                SharedPreferences preferences = getSharedPreferences("User", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("ID",user.getId());
-                editor.putString("MSV",user.getMsv());
-                editor.putString("Name",user.getName());
-                editor.putString("Email",user.getEmail());
-                editor.putString("Gender",user.getGender());
-                editor.putString("Birth",user.getBirth());
-                editor.putString("Class",user.getLop());
-                editor.putString("Address",user.getAddress());
-                editor.commit();
-                Toast.makeText(MainActivity.this,"Wellcome "+ user.getName(),Toast.LENGTH_LONG).show();
+            }
+            if (user.getName() ==  null) {
+                Intent intent1 = new Intent(MainActivity.this,Login.class);
+                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent1);
+                finish();
             }
         }
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_layout,new HomeFragment());
+        ft.commit();
+
+        view.setCheckedItem(R.id.home);
     }
 
     private void headerNav(NavigationView nav, User user) {
@@ -91,11 +89,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             txtEmail.setText(user.getEmail());
             txtFullName.setText(user.getName());
-
-//            nav_Menu = nav.getMenu();
-//            nav_Menu.findItem(R.id.signin).setVisible(false);
-//            nav_Menu.findItem(R.id.signup).setVisible(false);
-//            nav_Menu.findItem(R.id.logout).setVisible(true);
     }
 
     private void addControls() {
@@ -108,12 +101,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         view = findViewById(R.id.nvgView);
         view.setNavigationItemSelectedListener(MainActivity.this);
 
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_layout,new HomeFragment());
-        ft.commit();
-
-        view.setCheckedItem(R.id.home);
     }
 
     @Override
@@ -145,7 +132,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             case R.id.home:
                 ft.replace(R.id.fragment_layout,new HomeFragment());
-
+                ft.commit();
+                break;
+            case R.id.inforuser:
+                ft.replace(R.id.fragment_layout,new ThongTinFragment());
+                ft.commit();
+                break;
+            case R.id.point:
+                ft.replace(R.id.fragment_layout,new PointFragment());
                 ft.commit();
                 break;
             case R.id.logout:
@@ -154,7 +148,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 editor.clear();
                 editor.commit();
                 Intent logout = new Intent(getApplicationContext(),Login.class);
-                startActivityForResult(logout,121);
+                logout.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(logout);
+                finish();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

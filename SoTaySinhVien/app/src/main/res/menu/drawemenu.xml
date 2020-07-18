@@ -2,10 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
-        android:title="Home"
+        android:title="Nhà của tôi"
         android:icon="@drawable/ic_baseline_home_24"/>
     <item
+        android:id="@+id/inforuser"
+        android:title="Thông Tin"
+        android:icon="@drawable/ic_baseline_person_24"/>
+    <item
+        android:id="@+id/point"
+        android:title="Điểm Học Phần"
+        android:icon="@drawable/ic_baseline_event_note_24"/>
+    <item
         android:id="@+id/logout"
-        android:title="Sign out"
+        android:title="Đăng xuất"
         android:icon="@drawable/ic_baseline_exit_to_app_24"/>
 </menu>

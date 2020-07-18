@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DoUongActivity">
+
+    <ImageView
+        android:id="@+id/anh"
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
+        android:layout_height="165dp"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/txtten"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tên"
+        android:gravity="center"
+        android:textColor="#464646"
+        android:textSize="23sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtDiaChi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_baseline_place_24"
+        android:drawablePadding="5dp"
+        android:paddingLeft="10dp"
+        android:text="Dia Chi"
+        android:textColor="#252525"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_baseline_brightness_1_24"
+            android:text="Mở cửa :"
+            android:textColor="#6cc942"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txtHmoCua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_outline_query_builder_24"
+            android:drawablePadding="5dp"
+            android:text="07:00 - 21:00"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtGiatb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:drawableLeft="@drawable/ic_outline_monetization_on_24"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:text="12,000 - 50,000"
+        android:paddingLeft="10dp"
+        android:textColor="#959595"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:background="@color/colorPrimaryDark"
+        android:padding="5dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="MENU" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

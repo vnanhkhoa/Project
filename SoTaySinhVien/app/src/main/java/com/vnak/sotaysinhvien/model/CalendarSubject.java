@@ -6,13 +6,17 @@ import java.util.ArrayList;
 public class CalendarSubject implements Serializable {
     private String monhoc;
     private ArrayList<CalendarST> list_lich_hoc;
+    private ArrayList<Point> dsDiem;
 
     public CalendarSubject() {
     }
 
-    public CalendarSubject(String monhoc, ArrayList<CalendarST> list_lich_hoc) {
-        this.monhoc = monhoc;
-        this.list_lich_hoc = list_lich_hoc;
+    public ArrayList<Point> getDsDiem() {
+        return dsDiem;
+    }
+
+    public void setDsDiem(ArrayList<Point> dsDiem) {
+        this.dsDiem = dsDiem;
     }
 
     public String getMonhoc() {

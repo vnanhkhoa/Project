@@ -17,21 +17,15 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.vnak.sotaysinhvien.model.CalendarSubject;
 import com.vnak.sotaysinhvien.model.SampleObject;
 
 public class TableMainLayout extends RelativeLayout {
 
     // set the header titles
-    String headers[] = {
-            " \t \t \t \t \t \t \t \t \t \t \t \t \t \n\n",
-            "\t\t Thứ 2 \t\t",
-            "\t\t Thứ 3 \t\t",
-            "\t\t Thứ 4 \t\t",
-            "\t\t Thứ 5 \t\t",
-            "\t\t Thứ 6 \t\t",
-            "\t\t Thứ 7 \t\t",
-            "\t\t Chủ Nhật \t\t",
-    };
+    public String[] headers ;
+
+    ArrayList<CalendarSubject> data;
 
     TableLayout tableA;
     TableLayout tableB;
@@ -48,11 +42,15 @@ public class TableMainLayout extends RelativeLayout {
 
     List<SampleObject> sampleObjects = this.sampleObjects();
 
-    int headerCellsWidth[] = new int[headers.length];
+    public int[] headerCellsWidth;
 
-    public TableMainLayout(Context context) {
+
+
+    public TableMainLayout(Context context,String[] headers) {
         super(context);
         this.context = context;
+        this.headers = headers;
+        headerCellsWidth = new int[this.headers.length];
         // initialize the main components (TableLayouts, HorizontalScrollView, ScrollView)
         this.initComponents();
         this.setComponentsId();

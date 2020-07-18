@@ -36,7 +36,16 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
     LinearLayout calendar;
-
+    public String[] headers = {
+            " \t \t \t \t \t \t \t \t \t \t \t \t \t \n\n",
+            "\t\t Thứ 2 \t\t",
+            "\t\t Thứ 3 \t\t",
+            "\t\t Thứ 4 \t\t",
+            "\t\t Thứ 5 \t\t",
+            "\t\t Thứ 6 \t\t",
+            "\t\t Thứ 7 \t\t",
+            "\t\t Chủ Nhật \t\t",
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,10 +53,12 @@ public class HomeFragment extends Fragment {
        View view = inflater.inflate(R.layout.fragment_home, container, false);
        calendar = view.findViewById(R.id.calendar);
        SharedPreferences preferences = getContext().getSharedPreferences("User", Context.MODE_PRIVATE);
-       String msv = preferences.getString("MSV",null);
-       if (msv != null) {
-           LH lh = new LH();
-           lh.execute(msv);
+       if (preferences != null) {
+           String msv = preferences.getString("MSV",null);
+           if (msv != null) {
+               LH lh = new LH();
+               lh.execute(msv);
+           }
        }
         return view;
     }
@@ -60,12 +71,14 @@ public class HomeFragment extends Fragment {
     }
 
     static class TableLH extends TableMainLayout {
-        public static ArrayList<CalendarSubject> dsSubject = new ArrayList<>();
-        public TableLH(Context context) {
-            super(context);
-            System.out.println("LIST2 "+dsSubject.size());
-        }
 
+
+        public static ArrayList<CalendarSubject> dsSubject = new ArrayList<>();
+
+        public TableLH(Context context, String[] headers) {
+            super(context, headers);
+        }
+        
         @Override
         public List<SampleObject> sampleObjects() {
             System.out.println("LIST "+dsSubject.size());
@@ -124,12 +137,12 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(ArrayList<CalendarSubject> calendarSubjects) {
             super.onPostExecute(calendarSubjects);
+            TableLH.dsSubject.clear();
             for (CalendarSubject calendarSubject : calendarSubjects) {
                 TableLH.dsSubject.add(calendarSubject);
             }
-            TableLH tableLH = new TableLH(getContext());
+            TableLH tableLH = new TableLH(getContext(),headers);
             calendar.addView(tableLH);
-            System.out.println("LIST1 "+tableLH.dsSubject.size());
             progressDialog.dismiss();
         }
     }
