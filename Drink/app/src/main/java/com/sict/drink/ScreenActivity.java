@@ -55,7 +55,7 @@ public class ScreenActivity extends AppCompatActivity {
             for (int i =0;i<=100;i++){
                 try {
                     publishProgress(i);
-                    Thread.sleep(300);
+                    Thread.sleep(100);
                 }
                 catch (Exception ex)
                 {

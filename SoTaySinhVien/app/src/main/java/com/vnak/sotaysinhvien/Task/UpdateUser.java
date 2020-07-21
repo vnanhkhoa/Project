@@ -4,10 +4,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.vnak.sotaysinhvien.Server;
+import com.vnak.sotaysinhvien.Service;
 import com.vnak.sotaysinhvien.model.User;
-
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,7 +24,7 @@ public class UpdateUser extends AsyncTask<User,Void,Boolean> {
     protected Boolean doInBackground(User... users) {
         User user = users[0];
         try {
-            URL url=new URL(new Server().URLSERVER+"api/updateSV");
+            URL url=new URL(new Service().URLSERVER+"api/updateSV");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setReadTimeout(READ_TIMEOUT);

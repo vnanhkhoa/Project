@@ -3,7 +3,7 @@ package com.vnak.sotaysinhvien.Task;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.vnak.sotaysinhvien.Server;
+import com.vnak.sotaysinhvien.Service;
 import com.vnak.sotaysinhvien.model.CalendarST;
 import com.vnak.sotaysinhvien.model.CalendarSubject;
 
@@ -13,17 +13,15 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class LichHocTask extends AsyncTask<String,Void, ArrayList<CalendarSubject>> {
     @Override
     protected ArrayList<CalendarSubject> doInBackground(String... strings) {
         ArrayList<CalendarSubject> list = new ArrayList<>();
-        String urlservice = new Server().URLSERVER+"api/calendar/"+strings[0];
+        String urlservice = new Service().URLSERVER+"api/calendar/"+strings[0];
         try {
             URL url=new URL(urlservice);
             HttpURLConnection connection= (HttpURLConnection) url.openConnection();

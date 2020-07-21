@@ -3,8 +3,7 @@ package com.vnak.sotaysinhvien.Task;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.vnak.sotaysinhvien.Server;
-import com.vnak.sotaysinhvien.model.CalendarST;
+import com.vnak.sotaysinhvien.Service;
 import com.vnak.sotaysinhvien.model.CalendarSubject;
 import com.vnak.sotaysinhvien.model.Point;
 
@@ -23,7 +22,7 @@ public class PointTask extends AsyncTask<String,Void, ArrayList<CalendarSubject>
     protected ArrayList<CalendarSubject> doInBackground(String... strings) {
         ArrayList<CalendarSubject> list = new ArrayList<>();
         try {
-            URL url=new URL(new Server().URLSERVER+"api/point/"+strings[0]);
+            URL url=new URL(new Service().URLSERVER+"api/point/"+strings[0]);
             HttpURLConnection connection= (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-type", "application/json; charset=utf-8");

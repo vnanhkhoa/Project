@@ -111,7 +111,7 @@ public class Login extends AppCompatActivity {
         protected User doInBackground(String... strings) {
             User user = new User();
             try {
-                URL url=new URL(new Server().URLSERVER+"api/login");
+                URL url=new URL(new Service().URLSERVER+"api/login");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setReadTimeout(READ_TIMEOUT);

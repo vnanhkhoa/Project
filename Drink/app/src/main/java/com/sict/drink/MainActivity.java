@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,20 +39,21 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Quan> dsQuan;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseDatabase database ;
     DatabaseReference myRef;
     ArrayList<String> mangqc;
     public static ArrayList<GioHang> gioHangs;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
         gioHangs = new ArrayList<>();
         Intent intent = getIntent();
         if (intent.hasExtra("GIOHANG")) {
-            Toast.makeText(getApplicationContext(),"GIOHANG",Toast.LENGTH_SHORT).show();
             ArrayList<GioHang> a = (ArrayList<GioHang>) intent.getSerializableExtra("GIOHANG");
             gioHangs.addAll(a);
         }
@@ -62,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
                 if (currentUser == null) {
                     Intent intent = new Intent(MainActivity.this,LoginActivity.class);
                     startActivity(intent);
+                    return;
                 }
             }
         };
         addControls();
-        readData();
         Actionview();
     }
     private void Actionview() {
@@ -98,10 +101,14 @@ public class MainActivity extends AppCompatActivity {
         dsQuan = new ArrayList<>();
         viewFlipper = findViewById(R.id.viewflipper);
         mangqc = new ArrayList<>();
+        readData();
     }
 
     public void readData() {
         dsQuan.clear();
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
         myRef.child("quan").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -117,19 +124,15 @@ public class MainActivity extends AppCompatActivity {
                 }
                 AdapterQuan adapterQuan = new AdapterQuan(MainActivity.this,dsQuan);
                 listQuan.setAdapter(adapterQuan);
+                progressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.e("LOI", error.getMessage());
+                progressDialog.dismiss();
             }
         });
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(authStateListener);
     }
 
     @Override
@@ -137,6 +140,12 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu,menu);
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(authStateListener);
     }
 
     @Override

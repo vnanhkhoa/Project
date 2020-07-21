@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -33,7 +34,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class ThanhToanActivity extends AppCompatActivity {
-    private static int sum;
+    private static int tong;
     TextInputLayout txtName,txtSDT,txtDiaChi;
     RecyclerView listHoaDon;
     static TextView txtSl,txttongtien;
@@ -42,6 +43,7 @@ public class ThanhToanActivity extends AppCompatActivity {
     DatabaseReference myRef;
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +60,10 @@ public class ThanhToanActivity extends AppCompatActivity {
         btnXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog = new ProgressDialog(ThanhToanActivity.this);
+                progressDialog.setMessage("Loading...");
+                progressDialog.show();
                 hoaDon();
-                Intent intent = new Intent(ThanhToanActivity.this,MainActivity.class);
-                startActivity(intent);
             }
         });
     }
@@ -70,7 +73,7 @@ public class ThanhToanActivity extends AppCompatActivity {
         String name = txtName.getEditText().getText().toString().trim();
         String sdt = txtSDT.getEditText().getText().toString().trim();
         String diachi = txtDiaChi.getEditText().getText().toString().trim();
-        HoaDon hoaDon = new HoaDon(name,sdt,diachi,MainActivity.gioHangs,sum);
+        HoaDon hoaDon = new HoaDon(name,sdt,diachi,MainActivity.gioHangs,tong);
         Map<String,Object> hObjectMap = hoaDon.toMap();
         System.out.println("ID_USER: "+calendar.getTimeInMillis());
         String id = mAuth.getCurrentUser().getUid();
@@ -80,13 +83,17 @@ public class ThanhToanActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
+                    progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(),"Thanh toán thành công",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ThanhToanActivity.this,MainActivity.class);
+                    startActivity(intent);
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 System.out.println("LOI "+e);
+                progressDialog.dismiss();
             }
         });
 
@@ -103,15 +110,16 @@ public class ThanhToanActivity extends AppCompatActivity {
         AdapterGioHang adapterGioHang = new AdapterGioHang(ThanhToanActivity.this,MainActivity.gioHangs);
         listHoaDon.setAdapter(adapterGioHang);
         listHoaDon.setLayoutManager(new LinearLayoutManager(this));
-        sum();
+        sumTT();
     }
-    public static void sum() {
+    public static void sumTT() {
         int sl = 0;
+        tong = 0;
         for (GioHang gioHang : MainActivity.gioHangs) {
-            sum = sum + Integer.parseInt(gioHang.getDoUong().getGia())*gioHang.getSoLuong();
+            tong = tong + Integer.parseInt(gioHang.getDoUong().getGia())*gioHang.getSoLuong();
             sl += gioHang.getSoLuong();
         }
-        txttongtien.setText(NumberFormat.getNumberInstance(Locale.getDefault()).format(sum) +".000đ");
+        txttongtien.setText(NumberFormat.getNumberInstance(Locale.getDefault()).format(tong) +".000đ");
         txtSl.setText(sl+"");
     }
 

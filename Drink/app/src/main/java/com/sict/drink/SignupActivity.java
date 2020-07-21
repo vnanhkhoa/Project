@@ -61,7 +61,7 @@ public class SignupActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(SignupActivity.this, "Tạo Tài Khoản Thành Công",
                                     Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getApplicationContext(),SignupActivity.class);
+                            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                             startActivity(intent);
 
                         } else {

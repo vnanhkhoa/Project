@@ -75,7 +75,7 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.Holder> 
                 if ("Giỏ Hàng".equals(title)) {
                     GioHangActivity.sum();
                 } else if ("Thanh Toán".equals(title)) {
-                    ThanhToanActivity.sum();
+                    ThanhToanActivity.sumTT();
                 }
             }
         });
@@ -94,7 +94,7 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.Holder> 
                 if ("Giỏ Hàng".equals(title)) {
                     GioHangActivity.sum();
                 } else if ("Thanh Toán".equals(title)) {
-                    ThanhToanActivity.sum();
+                    ThanhToanActivity.sumTT();
                 }
             }
         });
