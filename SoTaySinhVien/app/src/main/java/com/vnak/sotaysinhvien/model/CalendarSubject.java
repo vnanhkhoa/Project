@@ -7,6 +7,7 @@ public class CalendarSubject implements Serializable {
     private String monhoc;
     private ArrayList<CalendarST> list_lich_hoc;
     private ArrayList<Point> dsDiem;
+    private ArrayList<Work> dsWork;
 
     public CalendarSubject() {
     }
@@ -33,5 +34,13 @@ public class CalendarSubject implements Serializable {
 
     public void setList_lich_hoc(ArrayList<CalendarST> list_lich_hoc) {
         this.list_lich_hoc = list_lich_hoc;
+    }
+
+    public ArrayList<Work> getDsWork() {
+        return dsWork;
+    }
+
+    public void setDsWork(ArrayList<Work> dsWork) {
+        this.dsWork = dsWork;
     }
 }

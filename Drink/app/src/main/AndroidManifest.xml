@@ -22,8 +22,8 @@
         <activity android:name=".ThanhToanActivity" />
         <activity android:name=".GioHangActivity" />
         <activity android:name=".DoUongActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".SignupActivity" android:theme="@style/Splash"/>
+        <activity android:name=".LoginActivity" android:theme="@style/Splash"/>
         <activity android:name=".MainActivity">
         </activity>
     </application>

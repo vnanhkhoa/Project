@@ -3,7 +3,7 @@
     package="com.vnak.sotaysinhvien">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,20 +13,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login" >
-
-        </activity>
-        <activity android:name=".MainActivity" >
+        <activity android:name=".EditWorkActivity"></activity>
+        <activity
+            android:name=".EditPass"
+            android:theme="@style/EditPassTheme" />
+        <activity android:name=".ThemLichCNActivity" />
+        <activity android:name=".Login" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".ThongBao" >
+
+        <receiver android:name=".ThongBao">
             <intent-filter>
                 <action android:name="android.intent.action.DATE_CHANGED" />
-                <action android:name="android.intent.action.TIME_TICK"/>
+                <action android:name="android.intent.action.TIME_TICK" />
             </intent-filter>
         </receiver>
     </application>

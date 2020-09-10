@@ -61,12 +61,10 @@ public class UpdateUser extends AsyncTask<User,Void,Boolean> {
                     line=br.readLine();
                 }
                 Boolean json= Boolean.valueOf(builder.toString());
-                if (json == true) {
-                    br.close();
-                    isr.close();
-                    connection.disconnect();
-                    return json;
-                }
+                br.close();
+                isr.close();
+                connection.disconnect();
+                return json;
 
             }
         }

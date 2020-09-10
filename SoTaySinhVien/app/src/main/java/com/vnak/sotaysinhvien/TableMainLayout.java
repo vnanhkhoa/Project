@@ -44,8 +44,6 @@ public class TableMainLayout extends RelativeLayout {
 
     public int[] headerCellsWidth;
 
-
-
     public TableMainLayout(Context context,String[] headers) {
         super(context);
         this.context = context;
@@ -264,13 +262,10 @@ public class TableMainLayout extends RelativeLayout {
 
     // table cell standard TextView
     TextView bodyTextView(String label){
-
         TextView bodyTextView = new TextView(this.context);
         bodyTextView.setText(label);
-        if (label != null) {
-            bodyTextView.setTypeface(Typeface.DEFAULT_BOLD);
-            bodyTextView.setTextColor(Color.BLACK);
-        }
+        bodyTextView.setTypeface(Typeface.DEFAULT_BOLD);
+        bodyTextView.setTextColor(Color.BLACK);
         bodyTextView.setBackgroundColor(Color.rgb(240, 242, 245));
         bodyTextView.setGravity(Gravity.CENTER);
         bodyTextView.setPadding(15, 5, 15, 5);

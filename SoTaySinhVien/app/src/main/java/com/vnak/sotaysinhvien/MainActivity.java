@@ -2,18 +2,23 @@ package com.vnak.sotaysinhvien;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,11 +41,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle drawerToggle;
     NavigationView view;
     public User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         addControls();
+        NotificationManagerCompat compat = NotificationManagerCompat.from(this);
+        if (compat.areNotificationsEnabled()) {
+            compat.cancel(1);
+        }
     }
 
     @Override
@@ -150,13 +160,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.logout:
                 SharedPreferences preferences = getSharedPreferences("User", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.clear();
-                editor.commit();
-                Intent logout = new Intent(getApplicationContext(),Login.class);
-                logout.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(logout);
-                finish();
+                preferences.edit().clear().commit();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Bạn Có Muốn Xóa Lịch Cá Nhân Không");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences preferences = getSharedPreferences("Work", Context.MODE_PRIVATE);
+                        preferences.edit().clear().commit();
+                        Intent logout = new Intent(getApplicationContext(),Login.class);
+                        logout.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(logout);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent logout = new Intent(getApplicationContext(),Login.class);
+                        logout.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(logout);
+                        finish();
+                    }
+                });
+                builder.create().show();
+                break;
+            case R.id.editPass:
+                Intent intent = new Intent(MainActivity.this,EditPass.class);
+                startActivity(intent);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

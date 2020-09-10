@@ -21,9 +21,8 @@ public class LichHocTask extends AsyncTask<String,Void, ArrayList<CalendarSubjec
     @Override
     protected ArrayList<CalendarSubject> doInBackground(String... strings) {
         ArrayList<CalendarSubject> list = new ArrayList<>();
-        String urlservice = new Service().URLSERVER+"api/calendar/"+strings[0];
         try {
-            URL url=new URL(urlservice);
+            URL url=new URL(strings[0]);
             HttpURLConnection connection= (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-type", "application/json; charset=utf-8");
@@ -72,10 +71,10 @@ public class LichHocTask extends AsyncTask<String,Void, ArrayList<CalendarSubjec
                 list.add(calendarSubject);
             }
             Log.d("JSON_Phong",json);
-            System.out.println("JSON "+ list.get(1).getList_lich_hoc().get(1).toString());
         }
         catch (Exception e)
         {
+            e.printStackTrace();
             Log.e("Loi",e.toString());
         }
         return list;
